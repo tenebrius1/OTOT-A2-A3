@@ -8,7 +8,7 @@ kubectl get nodes
 
 # create and apply deplyment
 printf "creating backend\n"
-kubectl apply -f k8s/manifests/backend.yml
+kubectl apply -f k8s/manifests/backend-deployment.yml
 printf "\n"
 kubectl wait --for=condition=ready pod --selector=app=backend --timeout=60s
 printf "\n"
@@ -26,11 +26,11 @@ kubectl -n ingress-nginx get deploy
 
 # set up ingress ClusterIP service
 printf "\ncreating ClusterIP service\n"
-kubectl apply -f k8s/manifests/ingress-service.yml
+kubectl apply -f k8s/manifests/backend-service.yml
 printf "\n"
 kubectl get svc
 
 # create ingress server
 printf "\ncreating ingress server\n"
-kubectl apply -f k8s/manifests/ingress-server.yml
+kubectl apply -f k8s/manifests/backend-ingress.yml
 kubectl get ingress
